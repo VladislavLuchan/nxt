@@ -5,12 +5,21 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 
-interface StartupCardProps {
-  post: any
+export interface StartupCardProps {
+    _id: string;
+    _createdAt: Date;
+    author: {
+      _id: string;
+      name: string;
+    };
+    views: number;
+    title: string;
+    description: string;
+    category: string;
+    image: string;
 }
 
-const StartupCard = ({ post }: StartupCardProps) => {
-  const { _id, _createdAt, author: { _id: authorId, name }, views, title, description, category, image } = post;
+const StartupCard = ({ _id, _createdAt, author: { _id: authorId, name }, views, title, description, category, image }: StartupCardProps) => {
   
   return (
     <li className='startup-card group'>
@@ -41,7 +50,7 @@ const StartupCard = ({ post }: StartupCardProps) => {
       <Link href={`/startup/${_id}`}>
         <p className='startup-card_desc'>{description}</p>
 
-        <img src={image} className="startup-card_img" alt="placeholder" />
+        <Image src={image} width={100} height={100} className="startup-card_img" alt="placeholder" />
       </Link>
 
       <div className='flex-between mt-5 gap-3'>
